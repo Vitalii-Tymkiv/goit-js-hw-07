@@ -6,7 +6,7 @@ import { galleryItems } from "./gallery-items.js";
 const galleryRef = document.querySelector(".gallery");
 const galleryMarkup = createGalleryItem(galleryItems);
 galleryRef.insertAdjacentHTML("beforeend", galleryMarkup);
-galleryRef.addEventListener("click", clickOnGalleryImage);
+galleryRef.addEventListener("click", clickOnGalleryLink);
 
 function createGalleryItem(event) {
   return event
@@ -18,7 +18,7 @@ function createGalleryItem(event) {
     })
     .join("");
 }
-function clickOnGalleryImage(event) {
+function clickOnGalleryLink(event) {
   event.preventDefault();
 
   const lightbox = new SimpleLightbox(".gallery a", {

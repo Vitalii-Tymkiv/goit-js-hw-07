@@ -34,9 +34,13 @@ function clickOnGalleryImage(event) {
 
   instance.show();
 
-  galleryRef.addEventListener("keydown", (event) => {
-    if (event.code === "Escape") {
-      instance.close();
-    }
-  });
+  galleryRef.addEventListener(
+    "keydown",
+    (event) => {
+      if (event.code === "Escape") {
+        instance.close();
+      }
+    },
+    { once: true }
+  );
 }

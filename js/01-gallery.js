@@ -28,19 +28,24 @@ function clickOnGalleryImage(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <img src='${event.target.dataset.source}' width="800" height="600">
- `);
+ `,
+    {
+      onShow: () => {
+        galleryRef.addEventListener("keydown", closeImgOnEscapeKey);
+      },
+      onClose: () => {
+        galleryRef.removeEventListener("keydown", closeImgOnEscapeKey);
+      },
+    }
+  );
+  const closeImgOnEscapeKey = function (event) {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  };
 
   instance.show();
-
-  galleryRef.addEventListener(
-    "keydown",
-    (event) => {
-      if (event.code === "Escape") {
-        instance.close();
-      }
-    },
-    { once: true }
-  );
 }
